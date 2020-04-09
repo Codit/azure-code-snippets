@@ -1,0 +1,21 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "alertName": {
+      "value": "my custom alert"
+    },
+    "metricName": {
+      "value": "Searchquery"
+    },
+    "appInsightsResourceName": {
+      "value": "testApp"
+    },
+    "apiName": {
+      "value": "testappapi"
+    },
+    "alertDescription": {
+      "value": "My custom description"
+    }
+  }
+}

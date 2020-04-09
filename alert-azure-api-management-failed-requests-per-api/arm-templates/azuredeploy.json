@@ -1,0 +1,81 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "alertName": {
+      "type": "string"
+    },
+    "metricName": {
+      "type": "string"
+    },
+    "appInsightsResourceName": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string",
+      "defaultValue": "GreaterThan",
+      "allowedValues": [
+        "Equals",
+        "GreaterThan",
+        "LessThan"
+      ]
+    },
+    "threshold": {
+      "type": "int",
+      "defaultValue": 10
+    },
+    "apiName": {
+      "type": "string"
+    },
+    "alertDescription": {
+      "type": "string"
+    },
+    "SeverityLevel": {
+      "type": "int",
+      "defaultValue": 3,
+      "allowedValues": [ 0, 1, 2, 3, 4 ]
+    },
+    "frequencyInMinutes": {
+      "type": "int",
+      "defaultValue": 5
+    },
+    "timeWindowInMinutes": {
+      "type": "int",
+      "defaultValue": 5
+    }
+  },
+  "variables": {
+    "query": "[concat('requests | where  resultCode  matches regex \"4[0-9]{2}|5[0-9]{2}\" | where  customDimensions[\"API Name\"] == \"', parameters('apiName'), '\" | project name')]"
+  },
+  "resources": [
+    {
+      "name": "[parameters('alertName')]",
+      "type": "Microsoft.Insights/scheduledQueryRules",
+      "apiVersion": "2018-04-16",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "description": "[parameters('alertDescription')]",
+        "enabled": "true",
+        "source": {
+          "query": "[variables('query')]",
+          "dataSourceId": "[resourceId('microsoft.insights/components', parameters('appInsightsResourceName'))]",
+          "queryType": "ResultCount"
+        },
+        "schedule": {
+          "frequencyInMinutes": "[parameters('frequencyInMinutes')]",
+          "timeWindowInMinutes": "[parameters('timeWindowInMinutes')]"
+        },
+        "action": {
+          "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+          "severity": "[parameters('SeverityLevel')]",
+          "trigger": {
+            "thresholdOperator": "[parameters('operator')]",
+            "threshold": "[parameters('threshold')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
