@@ -3,19 +3,19 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "alertName": {
-      "value": "my custom alert"
+      "value": ""
     },
     "metricName": {
-      "value": "Searchquery"
+      "value": ""
     },
     "appInsightsResourceName": {
-      "value": "testApp"
+      "value": ""
     },
     "apiName": {
-      "value": "testappapi"
+      "value": ""
     },
     "alertDescription": {
-      "value": "My custom description"
+      "value": ""
     }
   }
 }
