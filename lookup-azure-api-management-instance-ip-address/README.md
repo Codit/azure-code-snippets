@@ -1,7 +1,8 @@
 # Lookup the IP Address for Azure API Management Instance
 
 ## How does it work?
-In certain automated deployment (DevOps) scenarios, for example when you want to whitelist traffic from APIM only, you have the deployed resources (for example Logic Apps) automatically configured with the IP Address of the APIM Instance. This avoids having to manually reconfigure the IP address into all the required resources after deployment.
+In certain automated deployment (DevOps) scenarios, for example when you want to whitelist traffic from Azure API Management (APIM) only, you have the deployed resources (for example Logic Apps) automatically configured with the IP Address of the APIM Instance. This avoids having to manually reconfigure the IP address into all the required resources after deployment.
+
 
 Luckily, the Azure Resource Manager provides a function that can be used from ARM templates to lookup (or "reference") details from other resources during deployment.
 
