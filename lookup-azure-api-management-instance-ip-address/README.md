@@ -6,7 +6,8 @@ In certain automated deployment (DevOps) scenarios, for example when you want to
 
 Luckily, the Azure Resource Manager provides a function that can be used from ARM templates to lookup (or "reference") details from other resources during deployment.
 
-The **`reference()`** function allows you to retrieve the resource in the form of a JSON object and allows you to pick the specific properties that you are interested in:
+The **[`reference()`](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource#reference)** function allows you to retrieve the resource in the form of a JSON object and allows you to pick the specific properties that you are interested in:
+
 ```
 reference(resourceId(variables('apimResourceGroup'),'Microsoft.ApiManagement/service/',variables('apimServiceName')),'2019-12-01','Full').properties.publicIPAddresses[0]
 ```
